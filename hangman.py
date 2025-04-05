@@ -87,6 +87,7 @@ def playAgain():
         else:
             print('Enter Y or N')
 print('H A N G M A N')
+score = 0
 while True:
     missedletters = ''
     correctletters = ''
@@ -103,6 +104,8 @@ while True:
                     foundAllLetters = False
                     break
             if foundAllLetters:
+                score +=1
+                print("Score:", score)
                 print('You win! The word is: "' + secretWord + '"')
                 gameIsDone = True
         else:
@@ -110,6 +113,8 @@ while True:
             if len(missedletters) == len(HANGMAN_NOOSE) - 1:
                 displayBoard(HANGMAN_NOOSE, missedletters, correctletters, secretWord)
                 print('You are out of guesses.\nAfter ' + str(len(missedletters)) + ' missed guesses and ' + str(len(correctletters)) + ' correct guesses, the word was "' + secretWord + '"')
+                score = 0
                 gameIsDone = True
     if not playAgain():
+        print("Final score is:", score)
         exit()
