@@ -117,4 +117,4 @@ if playAgain():
     secretWord = getRandomWord(WORDS)
     gameIsDone = False
     while not gameIsDone:
-        displayBoard(HANGMAN_NOOSE, missedletters, correctletters)
+        displayBoard(HANGMAN_NOOSE, missedletters, correctletters, secretWord)
