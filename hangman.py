@@ -1,4 +1,3 @@
-
 import random
 HANGMAN_NOOSE = ['''
   +---+
@@ -88,33 +87,29 @@ def playAgain():
         else:
             print('Enter Y or N')
 print('H A N G M A N')
-missedletters = ''
-correctletters = ''
-secretWord = getRandomWord(WORDS)
-gameIsDone = False
-while not gameIsDone:
-    displayBoard(HANGMAN_NOOSE, missedletters, correctletters, secretWord)
-    guess = getGuess(missedletters + correctletters)
-    if guess in secretWord:
-        correctletters = correctletters + guess
-        foundAllLetters = True
-        for i in range(len(secretWord)):
-            if secretWord[i] not in correctletters:
-                foundAllLetters = False
-                break
-        if foundAllLetters:
-            print('You win! The word is: "' + secretWord + '"')
-            gameIsDone = True
-    else:
-        missedletters = missedletters + guess
-        if len(missedletters) == len(HANGMAN_NOOSE) - 1:
-            displayBoard(HANGMAN_NOOSE, missedletters, correctletters, secretWord)
-            print('You are out of guesses.\nAfter ' + str(len(missedletters)) + ' missed guesses and ' + str(len(correctletters)) + ' correct guesses, the word was "' + secretWord + '"')
-            gameIsDone = True
-if playAgain():
+while True:
     missedletters = ''
     correctletters = ''
     secretWord = getRandomWord(WORDS)
     gameIsDone = False
     while not gameIsDone:
         displayBoard(HANGMAN_NOOSE, missedletters, correctletters, secretWord)
+        guess = getGuess(missedletters + correctletters)
+        if guess in secretWord:
+            correctletters = correctletters + guess
+            foundAllLetters = True
+            for i in range(len(secretWord)):
+                if secretWord[i] not in correctletters:
+                    foundAllLetters = False
+                    break
+            if foundAllLetters:
+                print('You win! The word is: "' + secretWord + '"')
+                gameIsDone = True
+        else:
+            missedletters = missedletters + guess
+            if len(missedletters) == len(HANGMAN_NOOSE) - 1:
+                displayBoard(HANGMAN_NOOSE, missedletters, correctletters, secretWord)
+                print('You are out of guesses.\nAfter ' + str(len(missedletters)) + ' missed guesses and ' + str(len(correctletters)) + ' correct guesses, the word was "' + secretWord + '"')
+                gameIsDone = True
+    if not playAgain():
+        exit()
